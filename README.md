@@ -8,7 +8,11 @@ Eclipse Muto orchestrates (install/start/stop/configure..) ros software on racer
 
 ## Need to know
 
-are there any knowledge requirements the participants should fullfill
+No formal requirements are present for this challenge, yet certain degree of knowledge in following could be extremely useful:
+
+- Docker
+- ROS and/or ROS2
+- Python and/or C++
 
 ## Hack-Coaches
 
