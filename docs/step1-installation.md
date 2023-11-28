@@ -15,6 +15,71 @@ This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://githu
 - Ubuntu 22.04 native with ROS2 Humble
 - Docker (tested on Ubuntu 22.04)
 
+# Docker
+# Muto ROS2 Docker Images
+
+## ROS2
+- Base image `ros:humble`
+- Include deps to run muto safely:
+    - ros-humble-rviz2
+    - ros-humble-xacro
+    - ros-humble-ackermann-msgs
+    - ros-humble-joy
+    - ros-humble-rosbridge-server 
+- Tagged as `ghcr.io/eclipse-muto/ros2:humble`
+
+
+## Muto Barebones
+- Base image `ghcr.io/eclipse-muto/ros2:humble`
+- Includes all Muto ingredients.
+- Tagged as `ghcr.io/eclipse-muto/muto-barebones:humble`
+- Run with default config:
+
+```sh
+docker run ghcr.io/eclipse-muto/muto-barebones:humble /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
+```
+- Run with custom config:
+
+```sh
+docker run --rm -it \
+    -v $(pwd)/docker/muto/launch/config/muto.yaml:/home/muto/launch/config/muto.yaml \
+    ghcr.io/eclipse-muto/muto-barebones:humble \
+    /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
+```
+
+## Muto Multi Agent Simulation
+- Base image `ghcr.io/eclipse-muto/ros2:humble`
+- Includes simulation ingredients, inherits following components from `f1tenth.org`:
+    - `f1tenth_gym_ros`: Simulation frontend
+    - `f1tenth_gym`: Simulation backend
+- Tagged as `ghcr.io/eclipse-muto/multi-agent:humble`.
+- Run with:
+
+```sh
+docker run --rm -ti ghcr.io/eclipse-muto/multi-agent:humble
+```
+
+## Muto Racecar
+- Base image `ghcr.io/eclipse-muto/muto-barebones:humble`
+- Includes (on top of Muto orchestration) following ROS2 packages:
+    - `racecar`
+    - `reactive_gap_follower`
+- Tagged as `ghcr.io/eclipse-muto/racecar:humble`
+- Run with default config:
+
+```sh
+docker run --rm -ti ghcr.io/eclipse-muto:racecar:humble
+```
+- Run with custom config:
+
+```sh
+docker run --rm -it \
+    -v $(pwd)/docker/muto/launch/config/muto.yaml:/home/muto/launch/config/muto.yaml \
+    ghcr.io/eclipse-muto/racecar:humble \
+    /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
+```
+
+
 ## Native on Ubuntu
 
 **Clone this Repo**
