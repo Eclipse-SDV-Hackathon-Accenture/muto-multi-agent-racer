@@ -37,7 +37,7 @@ git clone https://github.com/Eclipse-SDV-Hackathon-Accenture/muto-multi-agent-ra
 - The simulation and an example race algorithm lives under this repository. To clone Muto to this workspace's src folder, you can use [vcstool](https://github.com/dirk-thomas/vcstool): 
 ```bash
 cd /path/to/this/repo
-vcs import src < autoware.repos
+vcs import src < muto-racer.repos
 ```
 
 - Install dependencies with rosdep then build:
