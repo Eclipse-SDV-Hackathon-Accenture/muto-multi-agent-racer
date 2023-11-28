@@ -19,7 +19,7 @@ This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://githu
 
 **Clone this Repo**
 ```bash
-git clone https://github.com/Eclipse-SDV-Hackathon-Accenture/muto-multi-agent-racer.git
+git clone --recurse-submodules https://github.com/Eclipse-SDV-Hackathon-Accenture/muto-multi-agent-racer.git
 ```
 
 **Install the following dependencies:**
