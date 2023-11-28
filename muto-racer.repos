@@ -1,0 +1,19 @@
+repositories:
+  # Eclipse Muto
+  composer:
+    type: git
+    url: https://github.com/eclipse-muto/composer
+    version: main
+  core:
+    type: git
+    url: https://github.com/eclipse-muto/core
+    version: main
+  messages:
+    type: git
+    url: https://github.com/eclipse-muto/messages
+    version: main
+  agent:
+    type: git
+    url: https://github.com/eclipse-muto/agent
+    version: main
+  # Simulation and racecar already lives under the repo you've just pulled
