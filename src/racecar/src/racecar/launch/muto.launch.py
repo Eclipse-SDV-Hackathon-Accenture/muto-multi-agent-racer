@@ -31,7 +31,7 @@ def generate_launch_description():
     # Files
     current_dir = os.path.dirname(__file__)
     muto_config = os.path.join(current_dir, '..', 'config', 'muto.yaml')
-
+    mutons = os.getenv("MUTONS")
     ld = LaunchDescription()
 
     try:
@@ -39,6 +39,7 @@ def generate_launch_description():
         node_agent = Node(
             name="muto_agent",
             package="agent",
+            namespace=mutons,
             executable="muto_agent",
             output=output,
             parameters=[muto_config]
@@ -47,6 +48,7 @@ def generate_launch_description():
         node_mqtt_gateway = Node(
             name="mqtt_gateway",
             package="agent",
+            namespace=mutons,
             executable="mqtt",
             output=output,
             parameters=[muto_config]
@@ -55,6 +57,7 @@ def generate_launch_description():
         node_commands = Node(
             name="commands_plugin",
             package="agent",
+            namespace=mutons,
             executable="commands",
             output=output,
             parameters=[muto_config]
@@ -63,6 +66,7 @@ def generate_launch_description():
         node_twin = Node(
             name="core_twin",
             package="core",
+            namespace=mutons,
             executable="twin",
             output=output,
             parameters=[muto_config]
@@ -70,6 +74,7 @@ def generate_launch_description():
 
         node_composer = Node(
             package="composer",
+            namespace=mutons,
             executable="muto_composer",
             output=output,
             parameters=[muto_config]
@@ -77,6 +82,7 @@ def generate_launch_description():
 
         node_compose_plugin = Node(
             package="composer",
+            namespace=mutons,
             executable="compose_plugin",
             output=output,
             parameters=[muto_config]
@@ -84,6 +90,7 @@ def generate_launch_description():
 
         node_launch_plugin = Node(
             package="composer",
+            namespace=mutons,
             executable="launch_plugin",
             output=output,
             parameters=[muto_config]
