@@ -43,7 +43,7 @@ As we want to focus on the technology exploration and integration, consider the 
 
 [Step 1 - Installation](docs/step1-installation.md)
 
-[Step 2 - Getting started with the F1Tenth Gym](docs/step-2-getting-started-with-f1tenth-gym.md)
+[Step 2 - Getting started with the F1Tenth Gym](docs/step2-getting-started-with-f1tenth-gym.md)
 
 [Step 3 - Explore sample racer](docs/step3-make-racecar-interact-with-f1tenth-gym.md)
 
