@@ -17,6 +17,11 @@ This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://githu
 
 ## Native on Ubuntu
 
+**Clone this Repo**
+```bash
+git clone https://github.com/Eclipse-SDV-Hackathon-Accenture/muto-multi-agent-racer.git
+```
+
 **Install the following dependencies:**
 - **ROS 2** Follow the instructions [here](https://docs.ros.org/en/foxy/Installation.html) to install ROS 2 Foxy.
 - **ROS 2** Follow the instructions [here](https://docs.ros.org/en/humble/Installation.html) to install ROS 2 Humble.
