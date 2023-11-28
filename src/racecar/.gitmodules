@@ -1,0 +1,3 @@
+[submodule "src/reactive_gap_follower"]
+	path = src/reactive_gap_follower
+	url = git@gitlab.eteration.com:composiv/eclipse-muto/multi-agent/reactive_gap_follower.git
