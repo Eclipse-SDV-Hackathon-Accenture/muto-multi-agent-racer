@@ -1,35 +1,16 @@
-# MIT License
-
-# Copyright (c) 2020 Hongrui Zheng
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 version: '3'
 services:
   sim:
     image: ghcr.io/eclipse-muto/multi-agent-sim:humble
     environment:
+      - ROS_DOMAIN_ID=42
       - DISPLAY=novnc:0.0
     networks:
       - x11
     stdin_open: true
     tty: true 
+    depends_on:
+      - novnc
   novnc:  
     image: theasp/novnc:latest
     environment:
@@ -39,5 +20,32 @@ services:
       - "8080:8080"
     networks:
       - x11
+
+  racer1:
+    image: ghcr.io/eclipse-muto/racecar:humble
+    environment:
+      - MUTONS=racecar1
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - ./samples/racer1/racer.yaml:/home/muto/install/racecar/share/racecar/config/muto.yaml
+      - ./samples/racer1/gap.yaml:/home/muto/install/reactive_gap_follower/share/reactive_gap_follower/config/params.yaml
+    networks:
+      - x11
+    depends_on:
+      - sim
+
+  racer2:
+    image: ghcr.io/eclipse-muto/racecar:humble
+    environment:
+      - MUTONS=racecar2
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - ./samples/racer2/racer.yaml:/home/muto/install/racecar/share/racecar/config/muto.yaml
+      - ./samples/racer2/gap.yaml:/home/muto/install/reactive_gap_follower/share/reactive_gap_follower/config/params.yaml
+    networks:
+      - x11
+    depends_on:
+      - sim
+
 networks:
   x11:
