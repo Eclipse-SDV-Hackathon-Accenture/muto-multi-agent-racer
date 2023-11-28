@@ -41,15 +41,15 @@ No formal requirements are present for this challenge, yet certain degree of kno
 
 As we want to focus on the technology exploration and integration, consider the following steps as exemplary, you're free to chose your own set of technology of course.
 
-[Step 1 - Installation](docs/step-1-Installation.md)
+[Step 1 - Installation](docs/step1-installation.md)
 
-[Step 2 - Getting started with the F1Tenth Gym](docs/step-2-f1tenth-gym.md)
+[Step 2 - Getting started with the F1Tenth Gym](docs/step-2-getting-started-with-f1tenth-gym.md)
 
 [Step 3 - Explore sample racer](docs/step-3-sampleracer.md)
 
-[Step 4 - Exploring utilies to visualize the daata ](docs/step-4-driving-score-app.md)
+[Step 4 - Exploring utilities to visualize the data](docs/step4-rviz.md)
 
-[Step 5 - Building ROS apps and services with Zenoh ](docs/step-5-build-zenoh.md)
+[Step 5 - Building ROS apps and services with Zenoh](docs/step5-build-zenoh.md)
 
 Happy hacking!
 
@@ -58,5 +58,5 @@ Happy hacking!
 ## Hack-Coaches
 
 - Naci Dai
-- Alp Sarica
+- Ibrahim Sel
 - Deniz Memis
