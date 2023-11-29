@@ -20,7 +20,54 @@ ros2 topic pub -r 100 racecar1/drive ackermann_msgs/msg/AckermannDriveStamped "{
 
 - If you'd like to send an `AckermannDriveStamped` to another racecar, you'd need to adjust the `topic` you'll send the message to and the `frame_id` of your corresponding `AckermannDriveStamped` message.
 
-# Example Drive for Racecar using Eclipse Muto
+## Tune the parameters for the racing algorithm
+Go to [Racecar1 Reactive Gap Follower config](../samples/racer1/gap.yaml) for racecar1
+
+Go to [Racecar2 Reactive Gap Follower config](../samples/racer2/gap.yaml) for racecar2
+
+```diff
+/**/cass_gap_follower_slow_pace:
+ ros__parameters:
+  racecar_namespace: "racecar1"
+  # Ranges Smoothing Filter Size
+  # Dimension: 1 x (2*smoothing_filter_size-1)
+  smoothing_filter_size: 1
+
+  # Wall Follow PID controller gains
+
+  # 2.45 radians 140 degrees (-70  >  +70)
+  forward_view_angle: 2.0
+
+  #rpilidar front index different than hokuyo
+  scanner_forward_offsetangle: 0.0
+
+  disparity_threshold: 0.3
+  disparity_filter_size: 3
+-  disparity_publish: true
++  disparity_publish: false
+  car_width: 0.40
+
+  # Desired Car Velocity based on Error
+- error_based_ranges.low: 1.0
++ error_based_ranges.low: 2.0
+  error_based_ranges.medium: 3.0
+  error_based_ranges.high: 6.0
+  error_based_velocities.low: 1.0
+- error_based_velocities.medium: 1.5
++ error_based_velocities.medium: 1.7
+  error_based_velocities.high: 2.0
+
+  drive_topic: "drive"  # notice that namespaces differ for each racecar so you don't have to change drive and scan topics
+  scan_topic: "scan"
+```
+
+After you tune the parameters,
+
+```bash
+cd ~/path_to_ws
+docker compose up
+```
+to observe the results of your changes
 
 ## What is a stack?
 - In the context of Eclipse Muto, a stack is a set of instructions written in a `json`-like structure to let Eclipse Muto know which ROS nodes it should introspect.
