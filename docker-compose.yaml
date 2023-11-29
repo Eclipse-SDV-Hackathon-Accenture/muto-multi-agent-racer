@@ -27,7 +27,7 @@ services:
       - MUTONS=racecar1
       - ROS_DOMAIN_ID=42
     volumes:
-      - ./samples/racer1/racer.yaml:/home/muto/install/racecar/share/racecar/config/muto.yaml
+      - ./samples/racer1/racer.yaml:/home/muto/launch/config/muto.yaml
       - ./samples/racer1/gap.yaml:/home/muto/install/reactive_gap_follower/share/reactive_gap_follower/config/params.yaml
     networks:
       - x11
@@ -40,7 +40,7 @@ services:
       - MUTONS=racecar2
       - ROS_DOMAIN_ID=42
     volumes:
-      - ./samples/racer2/racer.yaml:/home/muto/install/racecar/share/racecar/config/muto.yaml
+      - ./samples/racer2/racer.yaml:/home/muto/launch/config/muto.yaml
       - ./samples/racer2/gap.yaml:/home/muto/install/reactive_gap_follower/share/reactive_gap_follower/config/params.yaml
     networks:
       - x11
