@@ -59,6 +59,8 @@ As we want to focus on the technology exploration and integration, consider the 
 
 - [Step 5 - Building ROS apps and services with Zenoh](docs/step5-build-zenoh.md)
 
+- [Step 6 - Running Racers With Fleet Management Blueprint ](docs/step6-fms-integration.md)
+
 Happy hacking!
 
 ## Hack-Coaches
