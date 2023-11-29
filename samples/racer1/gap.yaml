@@ -39,12 +39,12 @@
   disparity_filter_size: 3
   disparity_publish: true
   car_width: 0.40
-  error_based_ranges.low: 1.0
-  error_based_ranges.medium: 3.0
-  error_based_ranges.high: 6.0
-  error_based_velocities.low: 2.0
-  error_based_velocities.medium: 3.0
-  error_based_velocities.high: 4.0
+  error_based_ranges.low: 2.0
+  error_based_ranges.medium: 4.0
+  error_based_ranges.high: 10.0
+  error_based_velocities.low: 0.5
+  error_based_velocities.medium: 2.5
+  error_based_velocities.high: 6.0
 
   drive_topic: "drive"
   scan_topic: "scan"

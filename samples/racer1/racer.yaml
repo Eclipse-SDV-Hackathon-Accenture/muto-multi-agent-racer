@@ -23,7 +23,7 @@
     twin_url: "http://ditto:ditto@sandbox.composiv.ai"
     anonymous: false
     namespace: org.eclipse.muto.sandbox
-    name: hackracer-01
+    name: hackracer-98
     type: real_car
     attributes: '{"brand": "Traxxas", "model": "Slash 4x4"}'
     stack_topic: "stack"

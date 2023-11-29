@@ -1,0 +1,7 @@
+/**/kuksa_ros_provider:
+ ros__parameters:
+  racecar_namespace: "racecar1"
+  drive_topic: "/racecar1/drive"
+  muto_vin: "40MUT05848Z411439"
+  databroker: "databroker-racer"
+  port: 55556

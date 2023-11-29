@@ -1,0 +1,4 @@
+/**/kuksa_ros_provider:
+ ros__parameters:
+  racecar_namespace: "racecar1"
+  drive_topic: "/racecar1/drive"

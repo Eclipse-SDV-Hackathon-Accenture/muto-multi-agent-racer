@@ -1,4 +1,6 @@
-version: '3'
+include:
+  - fleet-management/fms-blueprint-compose.yaml
+  - fleet-management/fms-blueprint-compose-muto.yaml
 services:
   sim:
     image: ghcr.io/eclipse-muto/multi-agent-sim:humble
@@ -6,7 +8,7 @@ services:
       - ROS_DOMAIN_ID=42
       - DISPLAY=novnc:0.0
     networks:
-      - x11
+      - fms-vehicle
     stdin_open: true
     tty: true 
     depends_on:
@@ -19,7 +21,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - x11
+      - fms-vehicle
 
   racer1:
     image: ghcr.io/eclipse-muto/racecar:humble
@@ -30,7 +32,7 @@ services:
       - ./samples/racer1/racer.yaml:/home/muto/launch/config/muto.yaml
       - ./samples/racer1/gap.yaml:/home/muto/install/reactive_gap_follower/share/reactive_gap_follower/config/params.yaml
     networks:
-      - x11
+      - fms-vehicle
     depends_on:
       - sim
 
@@ -43,8 +45,17 @@ services:
       - ./samples/racer2/racer.yaml:/home/muto/launch/config/muto.yaml
       - ./samples/racer2/gap.yaml:/home/muto/install/reactive_gap_follower/share/reactive_gap_follower/config/params.yaml
     networks:
-      - x11
+      - fms-vehicle
     depends_on:
       - sim
-networks:
-  x11:
+
+  kuksa-ros-provider:
+    image: ghcr.io/eclipse-muto/kuksa-ros-provider:humble
+    environment:
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - ./samples/fms/fms.yaml:/home/muto/install/kuksa_ros_provider/share/kuksa_ros_provider/config/kuksa_ros_provider.yaml
+    networks:
+      - fms-vehicle
+    depends_on:
+      - racer1
