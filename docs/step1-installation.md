@@ -1,89 +1,27 @@
 # Hack Challenge "ROS Racers"
 
-## Template Setup
-
-How To for getting the template up and running
-
 # F1TENTH gym environment ROS2 communication bridge
-This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://github.com/f1tenth/f1tenth_gym_ros) with multiagent support (up to 4) for the F1TENTH gym environment that turns it into a ROS2 simulation. The project is primarily intended for ease of use with [Eclipse Muto](https://projects.eclipse.org/projects/automotive.muto) which is an adaptive framework and a runtime platform for dynamically composable model-driven software stacks for ROS
+This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://github.com/f1tenth/f1tenth_gym_ros) with multiagent support (up to 3) for the F1TENTH gym environment that turns it into a ROS2 simulation. The project is primarily intended for ease of use with [Eclipse Muto](https://projects.eclipse.org/projects/automotive.muto) which is an adaptive framework and a runtime platform for dynamically composable model-driven software stacks for ROS
 
-# Installation
+# Installation Methods
 
-**Supported Systems:**
-### Docker
+### [Docker](#docker-1)
 Supported almost on all platforms and you do not need to compile anything so it's the fastest method to get started.
+#### Prerequisites
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Native
-You can use this method if you're using Ubuntu and don't want to use docker for some reason
+### [Native on Ubuntu](#native-on-ubuntu-1)
+You can use this method if you're using Ubuntu and don't want to use Docker for some reason
+- Tested on:
   + Ubuntu 20.04 with ROS2 Foxy
   + Ubuntu 22.04 with ROS2 Humble
 
 # Docker
 
-## ROS2
-- Base image `ros:humble`
-- Include deps to run muto safely:
-    - ros-humble-rviz2
-    - ros-humble-xacro
-    - ros-humble-ackermann-msgs
-    - ros-humble-joy
-    - ros-humble-rosbridge-server 
-- Tagged as `ghcr.io/eclipse-muto/ros2:humble`
+- You can directly head over to [Step 2](step2-getting-started-with-f1tenth-gym.md) as the docker images are already provided
 
-
-## Muto Barebones
-- Base image `ghcr.io/eclipse-muto/ros2:humble`
-- Includes all Muto ingredients.
-- Tagged as `ghcr.io/eclipse-muto/muto-barebones:humble`
-- Run with default config:
-
-```sh
-docker run ghcr.io/eclipse-muto/muto-barebones:humble /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
-```
-
-- To override default parameters in docker container:
-
-```sh
-docker run --rm -it \
-    -v $(pwd)/docker/muto/launch/config/muto.yaml:/home/muto/launch/config/muto.yaml \
-    ghcr.io/eclipse-muto/muto-barebones:humble \
-    /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
-```
-
-## Muto Multi Agent Simulation
-- Base image `ghcr.io/eclipse-muto/ros2:humble`
-- Includes simulation ingredients, inherits following components from `f1tenth.org`:
-    - `f1tenth_gym_ros`: Simulation frontend
-    - `f1tenth_gym`: Simulation backend
-- Tagged as `ghcr.io/eclipse-muto/multi-agent:humble`.
-- Run with:
-
-```sh
-docker run --rm -ti ghcr.io/eclipse-muto/multi-agent:humble
-```
-
-## Muto Racecar
-- Base image `ghcr.io/eclipse-muto/muto-barebones:humble`
-- Includes (on top of Muto orchestration) following ROS2 packages:
-    - `racecar`
-    - `reactive_gap_follower`
-- Tagged as `ghcr.io/eclipse-muto/racecar:humble`
-- Run with default config:
-
-```sh
-docker run --rm -ti ghcr.io/eclipse-muto:racecar:humble
-```
-- Run with custom config:
-
-```sh
-docker run --rm -it \
-    -v $(pwd)/docker/muto/launch/config/muto.yaml:/home/muto/launch/config/muto.yaml \
-    ghcr.io/eclipse-muto/racecar:humble \
-    /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
-```
-
-
-## Native on Ubuntu
+# Native on Ubuntu
 
 **Clone this Repo**
 ```bash
@@ -108,7 +46,7 @@ cd ~/path_to_ws
 vcs import src < muto.repos
 ```
 
-or if you don't have vcstool, 
+or if you don't have vcstool installed on your system, 
 ```bash
 cd ~/path_to_ws/src
 git clone https://github.com/eclipse-muto/composer
@@ -125,4 +63,5 @@ git clone https://github.com/eclipse-muto/messages
   colcon build --symlink-install
   ```
 
-- Now head to [Getting started](./step2-getting-started-with-f1tenth-gym.md) if installation was successful. If not, head to [Troubleshooting](./troubleshooting.md)
+# Next steps
+- Head to [Getting started](./step2-getting-started-with-f1tenth-gym.md) if installation was successful. If not, head to [Troubleshooting](./troubleshooting.md)

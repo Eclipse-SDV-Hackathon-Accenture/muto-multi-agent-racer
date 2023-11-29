@@ -1,6 +1,0 @@
-[submodule "src/muto-multiagent-sim"]
-	path = src/muto-multiagent-sim
-	url = git@gitlab.eteration.com:composiv/eclipse-muto/multi-agent/muto-multiagent-simulation.git
-[submodule "src/racecar"]
-	path = src/racecar
-	url = git@gitlab.eteration.com:composiv/eclipse-muto/multi-agent/racecar.git
