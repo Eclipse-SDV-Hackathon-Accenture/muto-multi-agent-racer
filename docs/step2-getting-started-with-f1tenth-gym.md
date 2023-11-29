@@ -6,6 +6,7 @@ docker compose up
 ```
 
 To stop the simulation:
+- Press `Ctrl + C`
 ```sh
 docker compose down
 ```
@@ -60,7 +61,9 @@ Above command is going to output you a `.pdf` file under the directory you've ex
 
 
 # Exploring Rviz Environment:
-- By now, you should be able to observe something similar to below:
+- Make sure you've completed the [Launching the simulation](#launching-the-simulation) step:
+- If you use Docker, you need to connect to [NoVNC](http://localhost:8080/vnc.html) server to be able to see Rviz.
+- You should be able to observe something similar to below:
 <img src="../assets/initial-sim.png"/>
 - Notice the white square at the center. That means, racecar robot descriptions are not published yet and the simulation is not in a started state. To accomplish that, click the `Start Race` button on the bottom left of Rviz.
 - After you clicked the `Start Race` button, it shoud look like:
