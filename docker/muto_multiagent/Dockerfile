@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 muto/ros2:humble
+FROM  ghcr.io/eclipse-muto/ros2:humble
 
 SHELL ["/bin/bash", "-c"]
 
@@ -9,7 +9,9 @@ RUN git clone https://github.com/f1tenth/f1tenth_gym
 RUN cd f1tenth_gym && \
     pip3 install -e .
 
-RUN git clone https://oauth2:-sWy1i6KAj2WxPHTZcuG@gitlab.eteration.com/composiv/eclipse-muto/multi-agent/muto-multiagent-simulation.git sim_ws
+RUN git clone https://github.com/Eclipse-SDV-Hackathon-Accenture/muto-multi-agent-racer.git
+RUN cp -r muto-multi-agent-racer/src/muto-multiagent-simulation ./sim_ws
+RUN rm -rf muto-multi-agent-racer
 
 WORKDIR /home/muto/sim_ws
 RUN source /opt/ros/humble/setup.bash && \

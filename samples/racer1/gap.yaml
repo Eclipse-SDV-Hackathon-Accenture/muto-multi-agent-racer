@@ -1,4 +1,4 @@
-cass_gap_follower_slow_pace:
+/**/cass_gap_follower_slow_pace:
  ros__parameters:
   racecar_namespace: "racecar1"
   # Ranges Smoothing Filter Size
@@ -29,7 +29,7 @@ cass_gap_follower_slow_pace:
   drive_topic: "drive"  # notice that namespaces differ for each racecar so you don't have to change drive and scan topics
   scan_topic: "scan"
 
-cass_gap_follower_medium_pace:
+/**/cass_gap_follower_medium_pace:
  ros__parameters:
   racecar_namespace: "racecar1"
   smoothing_filter_size: 1
@@ -49,7 +49,7 @@ cass_gap_follower_medium_pace:
   drive_topic: "drive"
   scan_topic: "scan"
 
-cass_gap_follower_fast_pace:
+/**/cass_gap_follower_fast_pace:
  ros__parameters:
   racecar_namespace: "racecar1"
   smoothing_filter_size: 1
