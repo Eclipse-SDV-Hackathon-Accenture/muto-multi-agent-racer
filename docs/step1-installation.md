@@ -10,13 +10,15 @@ This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://githu
 # Installation
 
 **Supported Systems:**
+### Docker
+Supported almost on all platforms and you do not need to compile anything so it's the fastest method to get started.
 
-- Ubuntu 20.04 native with ROS2 Foxy
-- Ubuntu 22.04 native with ROS2 Humble
-- Docker (tested on Ubuntu 22.04)
+### Native
+You can use this method if you're using Ubuntu and don't want to use docker for some reason
+  + Ubuntu 20.04 with ROS2 Foxy
+  + Ubuntu 22.04 with ROS2 Humble
 
 # Docker
-# Muto ROS2 Docker Images
 
 ## ROS2
 - Base image `ros:humble`
@@ -38,7 +40,8 @@ This is a ROS communication bridge inspired from [f1tenth_gym_ros](https://githu
 ```sh
 docker run ghcr.io/eclipse-muto/muto-barebones:humble /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
 ```
-- Run with custom config:
+
+- To override default parameters in docker container:
 
 ```sh
 docker run --rm -it \
@@ -99,10 +102,19 @@ git clone --recurse-submodules https://github.com/Eclipse-SDV-Hackathon-Accentur
 
 **Installing the simulation:**
 
-- The simulation and an example race algorithm lives under this repository. To clone Muto to this workspace's src folder, you can use [vcstool](https://github.com/dirk-thomas/vcstool): 
+- The simulation and an example race algorithm lives under this repository. To clone Muto to this workspace's src folder easily, you can use [vcstool](https://github.com/dirk-thomas/vcstool): 
 ```bash
-cd /path/to/this/repo
-vcs import src < muto-racer.repos
+cd ~/path_to_ws
+vcs import src < muto.repos
+```
+
+or if you don't have vcstool, 
+```bash
+cd ~/path_to_ws/src
+git clone https://github.com/eclipse-muto/composer
+git clone https://github.com/eclipse-muto/core
+git clone https://github.com/eclipse-muto/agent
+git clone https://github.com/eclipse-muto/messages
 ```
 
 - Install dependencies with rosdep then build:
