@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>agent</name>
+  <version>1.0.0</version>
+  <description>Eclipse Muto Agent Package</description>
+  <maintainer email="alp.sarica@eteration.com">Alp SARICA</maintainer>
+  <license>Eclipse Public License v2.0</license>
+
+  <test_depend>python3-pytest</test_depend>
+
+  <depend>rclpy</depend>
+  <depend>ros2launch</depend>
+  <depend>python-paho-mqtt-pip</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

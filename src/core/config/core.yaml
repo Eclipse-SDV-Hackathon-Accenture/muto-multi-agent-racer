@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    twin_url: "http://ditto:ditto@sandbox.composiv.ai"
+    anonymous: false
+    namespace: org.eclipse.muto.sandbox
+    name: f1tenth-01
+    type: real_car
+    attributes: '{"brand": "Traxxas", "model": "Slash 4x4"}'
