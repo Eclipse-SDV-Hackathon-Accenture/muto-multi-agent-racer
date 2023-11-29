@@ -19,48 +19,9 @@ You can use this method if you're using Ubuntu and don't want to use Docker for 
 
 # Docker
 
-### ROS2 Image
-- Base image `ros:humble`
-- Include deps to run muto safely:
-    - ros-humble-rviz2
-    - ros-humble-xacro
-    - ros-humble-ackermann-msgs
-    - ros-humble-joy
-    - ros-humble-rosbridge-server 
-- Tagged as `ghcr.io/eclipse-muto/ros2:humble`
+- You can directly head over to [Step 2](step2-getting-started-with-f1tenth-gym.md) as the docker images are already provided
 
-### Step-1: Muto Multi Agent Simulation
-```sh
-docker run --rm -ti ghcr.io/eclipse-muto/multi-agent:humble
-```
-- Base image `ghcr.io/eclipse-muto/ros2:humble`
-- Includes simulation ingredients, inherits following components from [F1tenth](https://f1tenth.org):
-    - `f1tenth_gym_ros`: Simulation frontend
-    - `f1tenth_gym`: Simulation backend
-- Tagged as `ghcr.io/eclipse-muto/multi-agent:humble`.
-
-
-### Step-2: Muto Racecar
-- Base image `ghcr.io/eclipse-muto/muto-barebones:humble`
-- Includes (on top of Muto orchestration) following ROS2 packages:
-    - `racecar`
-    - `reactive_gap_follower`
-- Tagged as `ghcr.io/eclipse-muto/racecar:humble`
-- Run with default [Eclipse Muto config](../src/racecar/racecar/config/muto.yaml):
-
-```sh
-docker run --rm -ti ghcr.io/eclipse-muto:racecar:humble
-```
-- To override the default configuration, adjust the contents of the [Eclipse Muto config](../src/racecar/racecar/config/muto.yaml) and run the below command:
-```sh
-docker run --rm -it \
-    -v $(pwd)/docker/muto/launch/config/muto.yaml:/home/muto/launch/config/muto.yaml \
-    ghcr.io/eclipse-muto/racecar:humble \
-    /bin/bash -c "source install/setup.bash && ros2 launch ./launch/muto.launch.py"
-```
-
-
-## Native on Ubuntu
+# Native on Ubuntu
 
 **Clone this Repo**
 ```bash

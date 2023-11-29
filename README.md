@@ -44,8 +44,10 @@ As we want to focus on the technology exploration and integration, consider the 
 ## Getting Started
 
 - Links:
-  + [Twin Server](http://ditto:ditto@sandbox.composiv.ai). You could add, remove and observe stacks, view API documentation etc.
-  + [Muto Dashboard](https://ditto:ditto@dashboard.composiv.ai). You could manage stacks without having to go through API documentation and manually doing it yourself
+  + Username: ditto
+  + Password: ditto
+    + [Twin Server](http://sandbox.composiv.ai). You could add, remove and observe stacks or you could view API documentation etc.
+    + [Muto Dashboard](https://dashboard.composiv.ai). You could start/stop/apply stacks without having to go through the API documentation and manually doing it yourself
 
 - [Step 1 - Installation](docs/step1-installation.md)
 
@@ -58,8 +60,6 @@ As we want to focus on the technology exploration and integration, consider the 
 - [Step 5 - Building ROS apps and services with Zenoh](docs/step5-build-zenoh.md)
 
 Happy hacking!
-
-
 
 ## Hack-Coaches
 

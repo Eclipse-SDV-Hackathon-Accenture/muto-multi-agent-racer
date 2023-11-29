@@ -1,13 +1,45 @@
 # Launching the Simulation
 ## Docker
 ```sh
-docker compose pull
+cd ~/path_to_ws
 docker compose up
+```
+The above command launches racers with default config. If you want to override the default configuration for `racecar1`, just go to its [config](../samples/racer1/racer.yaml) and adjust the parameters for your needs. 
+- For instance if you'd like to change the name of your `racecar1`:
+
+```diff
+/**:
+  ros__parameters:
+    twin_url: "http://ditto:ditto@sandbox.composiv.ai"
+    anonymous: false
+    namespace: org.eclipse.muto.sandbox
+-    name: hackracer-01
++    name: fast-racer-01
+    type: real_car
+    attributes: '{"brand": "Traxxas", "model": "Slash 4x4"}'
+    stack_topic: "stack"
+    twin_topic: "twin"
+```
+
+Same goes for `racecar2` [config](../samples/racer2/racer.yaml)
+```diff
+/**:
+  ros__parameters:
+    twin_url: "http://ditto:ditto@sandbox.composiv.ai"
+    anonymous: false
+    namespace: org.eclipse.muto.sandbox
+-    name: hackracer-02
++    name: slow-racer-02
+    type: real_car
+    attributes: '{"brand": "Traxxas", "model": "Slash 4x4"}'
+    stack_topic: "stack"
+    twin_topic: "twin"
 ```
 
 To stop the simulation:
 - Press `Ctrl + C`
 ```sh
+cd ~/path_to_ws
 docker compose down
 ```
 
