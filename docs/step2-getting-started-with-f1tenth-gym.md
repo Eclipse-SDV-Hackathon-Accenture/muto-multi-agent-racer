@@ -1,46 +1,72 @@
 # Launching the Simulation
-1. To launch the simulation, make sure you source both the ROS2 setup script and the local workspace setup script. Run the following in the bash session from the terminal:
+## Docker
+```sh
+docker compose pull
+docker compose up
+```
+
+To stop the simulation:
+```sh
+docker compose down
+```
+
+## Native
+1. To launch the simulation, make sure you source both the ROS2 setup script and the local workspace setup script. Run the following in a bash session
+
 ```bash
 source /opt/ros/<your-ros-distro>/setup.bash
 source install/local_setup.bash
 ros2 launch f1tenth_gym_ros gym_bridge_launch.py
 ```
-An rviz window should pop up showing the simulation either on your system
+An Rviz window should pop up with the default simulation config
 
 ## Configuring the simulation
-- The configuration file for the simulation is at `/path_to_ws/src/muto-multiagent-simulation/src/f1tenth_gym_ros/config/sim.yaml`.
-- Topic names and namespaces can be configured in `sim.yaml` but it's highly recommended to keep them unchanged.
-- The map can be changed via the `map_path` parameter. You'll have to use the full path to the map file. The map follows the ROS convention. It is assumed that the image file and the `yaml` file for the map are in the same directory with the same name
-- The `num_agent` parameter can be changed arbitrarily between [1, 4].
+1. Open [sim.yaml](../src/muto-multiagent-simulation/src/f1tenth_gym_ros/config/sim.yaml).
+   
+2. The map can be changed via the `map_path` parameter. You'll have to use the full path to the map file. The map follows the ROS convention. It is assumed that the image file and the `yaml` file for the map are in the same directory with the same name. 
+   + Don't include the .yaml extension to `map_path` parameter
+3. The `num_agent` parameter determines how many racers the simulation should expect. This can be changed arbitrarily between [1, 3].
+   + Supported number of agents will be increased. For now it is limited to maximum of 3 agents as there occurs performance issues after 3 agents.
 
-## 1. Create a racecar to spawn and use in simulator
-If you'd like to test your own algorithm with your own racecar workspace, it is suggested that you reference the README.md of the racecar package.
-  
-## 2. Topics published by the simulation
-- `{racecar_namespace}/{scan_topic}`: Where `racecar_namespace` and `scan_topic` are parameters from `sim.yaml` config file. These parameters could be but be configured from the `sim.yaml` file under the `config` directory but it is highly recommended that you keep them unchanged. If you wan't to change it for some specific reason, make sure that you update the corresponding racecar's `racecar_namespace` too. If left untouched, the simulation will publish a scan topic __*for each agent*__ with the following name: `/racecar{i}/scan` where {i} could be a number up to `num_agent` parameter specified in `sim.yaml`. If `num_agent` is 3, there will be `/racecar1/scan`, `/racecar2/scan`and `/racecar3/scan` with each containing different scan data based on the transforms and odometry of the specific racecar.
-- For instance, if you change the `racecar_namespace` to `foo`, the simulation will publish topics like `/foo1/scan_topic`, `/foo2/odom_topic`. So in your racecar workspace, you'd need to change the `racecar_namespace` parameter to `foo1` or `foo2` in order for the simulation to successfully seperate the racecars from each other. The simulation automatically numerates the agent right after the `racecar_namespace` so while configuring your racecar's `racecar_namespace`, you'd need to give `namespace of your choosing + agent number (which should be unique between 1 and num_agent parameter)` meanwhile while configuring the simulation's `racecar_namespace` in the `sim.yaml` file, you'd need to give `namespace of your choosing` without the agent number to match it properly with your racecars. 
+## 1. Topics published by the simulation
+Assuming the `num_agent` parameter in [sim.yaml](../src/muto-multiagent-simulation/src/f1tenth_gym_ros/config/sim.yaml) is 3:
+- `racecar1/odom` 
+- `racecar1/scan` 
+---
+- `racecar2/odom` 
+- `racecar2/scan` 
+---
+- `racecar3/odom` 
+- `racecar3/scan` 
+---
 
-- `{racecar_namespace}/{odom_topic}`: Exact same logic as the above. e.g.: `/racecar2/odom`, `/foo3/odom` 
-
-- A `tf` tree is also maintained. If you have `tf2_tools` installed, you could view the tree with:
+If you have `tf2_tools` installed, you could view the transform tree to get a better idea of what's going on in the simulation backend via below command:
 ```bash
 source /opt/ros/<your-ros2-distro>/setup.bash
 ros2 run tf2_tools view_frames.py
 ```
 Above command is going to output you a `.pdf` file under the directory you've executed the command.
 
-## 3. Topics subscribed by the simulation
- `/{racecar_namespace}/drive`: The topic to send `AckermannDriveStamped` messages where {i} is the agent number. 
-> **IMPORTANT: For sending seperate drive commands to agents, you need to send an `AckermannDriveStamped` message with a `frame_id` of `{racecar_namespace}{i}/base_link` to the `{racecar_namespace}{i}/drive` topic where {i} is the number of the specific agent you want to choose. e.g. msg.header.frame_id = racecar2/base_link** 
+## 2. Topics subscribed by the simulation
+- `/map`: To receive the map of the environment
 
-Below command sends an AckermannDriveStamped message to the 3rd agent. Notice the topic name and frame_id is unique for the chosen agent: 
-```bash
-ros2 topic pub racecar3/drive ackermann_msgs/msg/AckermannDriveStamped "{header: {stamp: {sec: 0, nanosec: 0}, frame_id: 'racecar3/base_link'}, drive: {steering_angle: 1.0, steering_angle_velocity: 1.0, speed: 1.0, acceleration: 0.0, jerk: 0.0}}"
-```
+- `/initalpose`: This is the topic for resetting all of the agents' poses to their initial state via RViz's 2D Pose Estimate tool. You need to choose the specific agent you'd like to reset via `MultiagentPanel` (Which is the Rviz Plugin that comes with the simulation):
+--- 
 
-- `/map`: The map of the environment
-
-- `/initalpose`: This is the topic for resetting all of the agents' poses to their initial state via RViz's 2D Pose Estimate tool. (You need to choose the specific agent you'd like to reset via `MultiagentPanel`: an Rviz Plugin that comes with the simulation)
++ Below are the topics to get your racecars going
+    - `racecar1/drive`
+    - `racecar2/drive`
+    - `racecar3/drive`
 
 
+# Exploring Rviz Environment:
+- By now, you should be able to observe something similar to below:
+<img src="../assets/initial-sim.png"/>
+- Notice the white square at the center. That means, racecar robot descriptions are not published yet and the simulation is not in a started state. To accomplish that, click the `Start Race` button on the bottom left of Rviz.
+- After you clicked the `Start Race` button, it shoud look like:
+<img src="../assets/started-sim.png" />
 
+- Now the simulation is in a ready state waiting for you to send control inputs to the racecars!
+
+# Next Step
+- Head over to the [racecar configuration](step3-make-racecar-interact-with-f1tenth-gym.md) file to get your racecar moving!
