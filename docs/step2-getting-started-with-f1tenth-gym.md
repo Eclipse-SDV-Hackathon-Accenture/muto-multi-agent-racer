@@ -12,6 +12,7 @@ The above command launches racers with default config. If you want to override t
   ros__parameters:
     twin_url: "http://ditto:ditto@sandbox.composiv.ai"
     anonymous: false
+    prefix: muto
     namespace: org.eclipse.muto.sandbox
 -    name: hackracer-01
 +    name: fast-racer-01
@@ -27,6 +28,7 @@ Same goes for `racecar2` [config](../samples/racer2/racer.yaml)
   ros__parameters:
     twin_url: "http://ditto:ditto@sandbox.composiv.ai"
     anonymous: false
+    prefix: muto
     namespace: org.eclipse.muto.sandbox
 -    name: hackracer-02
 +    name: slow-racer-02

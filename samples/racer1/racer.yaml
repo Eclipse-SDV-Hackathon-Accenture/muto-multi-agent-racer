@@ -22,6 +22,7 @@
   ros__parameters:
     twin_url: "http://ditto:ditto@sandbox.composiv.ai"
     anonymous: false
+    prefix: muto
     namespace: org.eclipse.muto.sandbox
     name: hackracer-98
     type: real_car
@@ -44,6 +45,7 @@
     keep_alive: 60
     user: null
     password: null
+    prefix: muto
     namespace: org.eclipse.muto.sandbox
     
 
